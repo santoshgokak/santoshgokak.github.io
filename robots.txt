@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://santoshgokak.github.io/sitemap.xml 
