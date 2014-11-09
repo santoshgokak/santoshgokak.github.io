@@ -5,12 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - Santosh Gokak</title>
+  <title>Gradle : How to Modify Tasks Post Task Graph Creation - Santosh Gokak</title>
   <meta name="author" content="Santosh Gokak">
 
   
-  <meta name="description" content="Blog Archive 2014 Gradle : How to Modify Tasks Post Task Graph Creation
-Nov 09 2014 Recent Posts Gradle : How to Modify Tasks Post Task Graph &hellip;">
+  <meta name="description" content="Gradle allows you to script your build file and add hooks in to the build lifecycle so you can maximize flexibility without compilcating build setup &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -19,7 +18,7 @@ Nov 09 2014 Recent Posts Gradle : How to Modify Tasks Post Task Graph &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://santoshgokak.github.io/blog/archives">
+  <link rel="canonical" href="http://santoshgokak.github.io/blog/2014/11/09/gradle-how-to-modify-tasks-post-task-graph-creation">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Santosh Gokak" type="application/atom+xml">
@@ -66,31 +65,97 @@ Nov 09 2014 Recent Posts Gradle : How to Modify Tasks Post Task Graph &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      <h1 class="entry-title">Gradle : How to Modify Tasks Post Task Graph Creation</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-11-09T02:16:28-05:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>2:16 am</span></time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
+<div class="entry-content"><p>Gradle allows you to script your build file and add hooks in to the build lifecycle so you can maximize flexibility without compilcating build setup and tasks.
+One of the useful ways to manipulate all tasks once they are loaded by gradle into task execution graph is to use the whenReady lifecycle hook which gets called when gradle populates the complete tasks execution graph.This also allows you to dynamically modify task properties, add new properties,etc. This comes helpful when you need to manipulate some tasks based on the user arguments passed in the project.</p>
 
-  
-  <h2>2014</h2>
+<p>Below is the snippet that you need to add tomake this work:
+gradle.taskGraph.whenReady {
+  tasks.each {
+    it.doFirst {
+      println &ldquo;Calling ${it.name}&rdquo;
+    }
+  }
+}</p>
 
-<article>
-  
-<h1><a href="/blog/2014/11/09/gradle-how-to-modify-tasks-post-task-graph-creation/">Gradle : How to Modify Tasks Post Task Graph Creation</a></h1>
-<time datetime="2014-11-09T02:16:28-05:00" pubdate><span class='month'>Nov</span> <span class='day'>09</span> <span class='year'>2014</span></time>
+<p>Output:
+sgokak@sgokak-ThinkPad-T430 ~/myspace/gradle-in-action/Todo $ gradle build
+:compileJava
+Calling compileJava
+:processResources UP-TO-DATE
+:classes
+Calling classes
+:war
+Calling war
+:assemble
+Calling assemble
+:compileTestJava UP-TO-DATE
+:processTestResources UP-TO-DATE
+:testClasses
+Calling testClasses
+:test UP-TO-DATE
+:check
+Calling check
+:build
+Calling build</p>
 
+<p>BUILD SUCCESSFUL</p>
 
-</article>
-
+<p>Total time: 10.185 sec</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Santosh Gokak</span></span>
+
+      
+
+
+
+
+<time class='entry-date' datetime='2014-11-09T02:16:28-05:00'><span class='date'><span class='date-month'>Nov</span> <span class='date-day'>9</span><span class='date-suffix'>th</span>, <span class='date-year'>2014</span></span> <span class='time'>2:16 am</span></time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://santoshgokak.github.io/blog/2014/11/09/gradle-how-to-modify-tasks-post-task-graph-creation/" data-via="santoshgokak" data-counturl="http://santoshgokak.github.io/blog/2014/11/09/gradle-how-to-modify-tasks-post-task-graph-creation/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>
