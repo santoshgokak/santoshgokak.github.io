@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Gradle | Santosh Gokak]]></title>
+  <link href="http://santoshgokak.github.io/blog/categories/gradle/atom.xml" rel="self"/>
+  <link href="http://santoshgokak.github.io/"/>
+  <updated>2014-11-09T02:36:46-05:00</updated>
+  <id>http://santoshgokak.github.io/</id>
+  <author>
+    <name><![CDATA[Santosh Gokak]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Gradle : How to Modify Tasks Post Task Graph Creation]]></title>
+    <link href="http://santoshgokak.github.io/blog/2014/11/09/gradle-how-to-modify-tasks-post-task-graph-creation/"/>
+    <updated>2014-11-09T02:16:28-05:00</updated>
+    <id>http://santoshgokak.github.io/blog/2014/11/09/gradle-how-to-modify-tasks-post-task-graph-creation</id>
+    <content type="html"><![CDATA[<p>Gradle allows you to script your build file and add hooks in to the build lifecycle so you can maximize flexibility without compilcating build setup and tasks.
+One of the useful ways to manipulate all tasks once they are loaded by gradle into task execution graph is to use the whenReady lifecycle hook which gets called when gradle populates the complete tasks execution graph.This also allows you to dynamically modify task properties, add new properties,etc. This comes helpful when you need to manipulate some tasks based on the user arguments passed in the project.</p>
+
+<p>Below is the snippet that you need to add tomake this work:
+<code>[Groovy] [build.gradle]
+gradle.taskGraph.whenReady {
+  tasks.each {
+    it.doFirst {
+      println "Calling ${it.name}"
+    }
+  }
+}
+</code></p>
+
+<p>Output:
+sgokak@sgokak-ThinkPad-T430 ~/myspace/gradle-in-action/Todo $ gradle build
+:compileJava
+Calling compileJava
+:processResources UP-TO-DATE
+:classes
+Calling classes
+:war
+Calling war
+:assemble
+Calling assemble
+:compileTestJava UP-TO-DATE
+:processTestResources UP-TO-DATE
+:testClasses
+Calling testClasses
+:test UP-TO-DATE
+:check
+Calling check
+:build
+Calling build</p>
+
+<p>BUILD SUCCESSFUL</p>
+
+<p>Total time: 10.185 sec</p>
+]]></content>
+  </entry>
+  
+</feed>
