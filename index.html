@@ -91,14 +91,24 @@
   <div class="entry-content"><p>Gradle allows you to script your build file and add hooks in to the build lifecycle so you can maximize flexibility without compilcating build setup and tasks.
 One of the useful ways to manipulate all tasks once they are loaded by gradle into task execution graph is to use the whenReady lifecycle hook which gets called when gradle populates the complete tasks execution graph.This also allows you to dynamically modify task properties, add new properties,etc. This comes helpful when you need to manipulate some tasks based on the user arguments passed in the project.</p>
 
-<p>Below is the snippet that you need to add tomake this work:
-gradle.taskGraph.whenReady {
-  tasks.each {
-    it.doFirst {
-      println &ldquo;Calling ${it.name}&rdquo;
-    }
-  }
-}</p>
+<p>Below is the snippet that you need to add tomake this work:</p>
+
+<figure class='code'><figcaption><span>build.gradle</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='groovy'><span class='line'><span class="n">gradle</span><span class="o">.</span><span class="na">taskGraph</span><span class="o">.</span><span class="na">whenReady</span> <span class="o">{</span>
+</span><span class='line'>  <span class="n">tasks</span><span class="o">.</span><span class="na">each</span> <span class="o">{</span>
+</span><span class='line'>    <span class="n">it</span><span class="o">.</span><span class="na">doFirst</span> <span class="o">{</span>
+</span><span class='line'>      <span class="n">println</span> <span class="s2">&quot;Calling ${it.name}&quot;</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'>  <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
 
 <p>Output:
 sgokak@sgokak-ThinkPad-T430 ~/myspace/gradle-in-action/Todo $ gradle build

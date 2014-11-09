@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Gradle | Santosh Gokak]]></title>
   <link href="http://santoshgokak.github.io/blog/categories/gradle/atom.xml" rel="self"/>
   <link href="http://santoshgokak.github.io/"/>
-  <updated>2014-11-09T02:36:46-05:00</updated>
+  <updated>2014-11-09T02:39:39-05:00</updated>
   <id>http://santoshgokak.github.io/</id>
   <author>
     <name><![CDATA[Santosh Gokak]]></name>
@@ -22,7 +22,7 @@
 One of the useful ways to manipulate all tasks once they are loaded by gradle into task execution graph is to use the whenReady lifecycle hook which gets called when gradle populates the complete tasks execution graph.This also allows you to dynamically modify task properties, add new properties,etc. This comes helpful when you need to manipulate some tasks based on the user arguments passed in the project.</p>
 
 <p>Below is the snippet that you need to add tomake this work:
-<code>[Groovy] [build.gradle]
+<code>groovy build.gradle
 gradle.taskGraph.whenReady {
   tasks.each {
     it.doFirst {
